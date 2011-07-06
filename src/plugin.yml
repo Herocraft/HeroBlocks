@@ -1,0 +1,8 @@
+name: HeroBlocks
+main: com.herocraftonline.dthielke.heroblocks.HeroBlocks
+version: 0.0.1
+website: http://www.herocraftonline.com
+authors: [DThielke]
+description: Grants various rewards to Heroes for interacting with particular blocks
+softdepend: [Permissions, Heroes]
+commands:

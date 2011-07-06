@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/craftbukkit-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="libs/Permissions.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Heroes"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
