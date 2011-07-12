@@ -20,7 +20,7 @@ public class BlockManager {
         blocks.add(block);
     }
 
-    public void removeBlock(Location location) {
+    public void removeBlockAt(Location location) {
         for (AbstractHeroBlock block : blocks) {
             if (location.equals(block.getLocation())) {
                 blocks.remove(block);
@@ -29,7 +29,7 @@ public class BlockManager {
         }
     }
 
-    public AbstractHeroBlock getBlock(Location location) {
+    public AbstractHeroBlock getBlockAt(Location location) {
         for (AbstractHeroBlock block : blocks) {
             if (location.equals(block.getLocation())) {
                 return block;
@@ -48,6 +48,7 @@ public class BlockManager {
                 HeroBlocks.log(Level.INFO, "    --> " + identifier);
                 AbstractHeroBlock block = ExpBlock.load(config, "ExpBlock." + identifier);
                 if (block != null) {
+                    HeroBlocks.log(Level.INFO, "        Block added");
                     blocks.add(block);
                     count++;
                 }

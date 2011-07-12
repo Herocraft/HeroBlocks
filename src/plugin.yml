@@ -4,5 +4,8 @@ version: 0.0.1
 website: http://www.herocraftonline.com
 authors: [DThielke]
 description: Grants various rewards to Heroes for interacting with particular blocks
-softdepend: [Permissions, Heroes]
+depends: [Heroes]
 commands:
+  hb:
+    description: Lists all HeroBlocks commands 
+    usage: Wrong usage. For help, type /<command> help

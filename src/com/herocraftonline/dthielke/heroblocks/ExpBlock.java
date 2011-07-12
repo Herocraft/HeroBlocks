@@ -15,21 +15,26 @@ import org.bukkit.util.config.ConfigurationNode;
 import com.herocraftonline.dev.heroes.classes.HeroClass.ExperienceType;
 import com.herocraftonline.dev.heroes.persistence.Hero;
 
-public class ExpBlock extends AbstractHeroBlock {
+public class ExpBlock extends AbstractHeroBlock implements Rewardable, Locatable, Savable {
 
-    private int exp;
+    private double exp;
     private Set<String> users;
 
-    public ExpBlock(Block block, int exp) {
+    public ExpBlock(Block block, double exp) {
         super(block);
         this.exp = exp;
         this.users = new HashSet<String>();
     }
 
     @Override
+    public String toString() {
+        return "Exp Block (" + exp + " exp) used by " + users;
+    }
+
+    @Override
     public boolean isEligible(Hero hero) {
         String name = hero.getPlayer().getName().toLowerCase();
-        return users.contains(name);
+        return !users.contains(name);
     }
 
     @Override
@@ -73,13 +78,13 @@ public class ExpBlock extends AbstractHeroBlock {
         String[] split = path.split("\\.");
         String identifier = split.length == 0 ? path : split[split.length - 1];
 
-        Pattern pattern = Pattern.compile("(\\w+)\\|(\\d+),(\\d+),(\\d+)");
+        Pattern pattern = Pattern.compile("(\\w+)\\|([-]?\\d+),([-]?\\d+),([-]?\\d+)");
         Matcher matcher = pattern.matcher(identifier);
 
         if (!matcher.matches()) {
             return null;
         }
-        
+
         if (matcher.groupCount() != 4) {
             return null;
         }
@@ -90,7 +95,7 @@ public class ExpBlock extends AbstractHeroBlock {
         int z = Integer.valueOf(matcher.group(4));
 
         Block block = Bukkit.getServer().getWorld(world).getBlockAt(x, y, z);
-        int exp = config.getInt(path + ".exp", 0);
+        double exp = config.getDouble(path + ".exp", 0);
         Set<String> users = new HashSet<String>(config.getStringList(path + ".users", null));
 
         ExpBlock expBlock = new ExpBlock(block, exp);
